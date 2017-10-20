@@ -1,0 +1,18 @@
+
+N muss klein
+Infix funktionen mit ``
+space anpassen
+
+lastA :: [a] -> a
+lastA xs = head (reverse xs)
+
+initA :: [a] -> [a]
+initA xs = reverse (drop 1 (reverse xs))
+
+initB :: [a] -> [a]
+initB xs = reverse (tail (reverse xs))
+
+gcdA :: Int -> Int -> Int
+gcdA a b | a==b = a
+         | a > b = gcdA (a-b) b
+         | a < b = gcdA a (b-a)
