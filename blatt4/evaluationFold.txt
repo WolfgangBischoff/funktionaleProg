@@ -1,0 +1,19 @@
+foldr f b [] = b
+foldr f b (x:xs) = x `f` foldr f b xs
+
+foldr (-) 0 [1,2,3]
+1 - foldr (-) 0 [2,3] since [1,2,3] /= []
+1 - 2 - foldr (-) 0 [3] since [2,3] /= []
+1 - 2 - 3 - foldr (-) 0 [] since [3] /= []
+1 - (2 - (3 - 0)) since [] == []
+1 - (-1)
+2
+
+foldl f b [] = b
+foldl f b (x:xs) = foldl f (b `f` x) xs
+
+foldl (-) 0 [1,2,3]
+foldl (-) (0-1) [2,3] since list not empty
+foldl (-) ((-1)-2) [3] since list not empty
+foldl (-) ((-3)-3) [] since list not empty
+-6 since list is empty
