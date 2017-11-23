@@ -1,8 +1,23 @@
 
 -- Reduce add 2 3
-add x y = x + y
+-- add x y
+-- lefmost innermost reduction, Parameter??
+= @(λmnfx.m f (n f x)) (λfx. f (f(x)))@ (λfx.f (f x)) //m ersetzt
+-> (λnfx. @(λfx.f (f (f x))) f@ (n f x)) (λfx.f (f x)) //f ersetzt, fällt weg
+-> @(λnfx.(λx.f(f(f x))) (n f x))@ (λfx.f(f x)) //x ersetzt durch (n f x), λ fällt weg
+-> @(λnfx.f(f(f(n f x)))) (λfx.f(f x))@ //n ersetzen mit (λfx.f(f x))
+-> λfx.f(f(f(@(λfx.f(f x))f@ x))) //f ersetzen durch f, fällt weg
+-> λfx.f(f(f(@(λx.f(f x))x @))) //x ersetzen durch x, fällt weg
+-> λfx.f(f(f(f(f x))))
 
-
+-- leftmost outermost reduction, formeln auflösen
+= @(λmnfx.m f (n f x)) (λfx. f (f(x)))@ (λfx.f (f x)) //m ersetzt
+-> @(λnfx. (λfx.f (f (f x))) f (n f x)) (λfx.f (f x))@ //n ersetzen mit (λfx.f (f x))
+-> λfx. @(λfx.f (f (f x))) f@ ((λfx.f (f x) f x) //f durch f ersetzen, fällt weg
+-> λfx. @(λx.f (f (f x))) ((λfx.f (f x) f x)@ //x durch ((λfx.f (f x) f x) ersetzen
+-> λfx. (f (f (f @(λfx.f (f x)) f@ x))) //f fällt weg
+-> λfx. (f (f (f @(λx.f (f x)) x@))) //x fällt weg
+-> λfx. (f (f (f (f (f x)))))
 
 data BTree a = Empty | Node a (BTree a) (BTree a)
  deriving (Eq, Show, Read)
