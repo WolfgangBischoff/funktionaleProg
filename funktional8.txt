@@ -1,0 +1,19 @@
+Zettel 8
+
+2)
+Rekursion: Sich selbst aufrufen
+Mutually recursive: Funktionen die sich gegenseitig aufrufen
+Tail Recursive: Letzte Aktion der Funktion ist der rekursive Aufruf
+
+Aus vorherigem FS und nicht tail recusive:
+length []=  0
+length (_:xs)  =  1 + length xs
+
+3)
+Consider the function
+range m n | m > n     = []
+	  | otherwise = m : range (m + 1) n
+
+Give a tail recursive variant of range.
+
+
