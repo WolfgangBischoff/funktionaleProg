@@ -15,8 +15,17 @@ range m n | m > n     = []
 	  | otherwise = m : range (m + 1) n
 
 Give a tail recursive variant of range.
+Endrekursion ist cool weil der Stack nicht so lang wird.
 
-range m n = range_h m n []
-where range_h m n acc | m > n = reverse acc
-| otherwise = range_h (m+1) n (m:acc)
+range m n = range_h m n [] -- range_h weil andere Parameterzahl, muss bei leere Liste beginnen
+where range_h m n acc --acc ist leere Liste, rechnet auf
+| m > n = reverse acc --Wenn m größer n dann fertig (reverse zurückgeben)
+| otherwise = range_h (m+1) n (m:acc) --m anfügen, hochzählen
+
+
+length [] = 0 
+length (_:xs) = 1 + (length xs)
+
+length acc []     = acc 
+length acc (_:xs) = length (1+acc) xs
 
