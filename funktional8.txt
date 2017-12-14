@@ -16,4 +16,7 @@ range m n | m > n     = []
 
 Give a tail recursive variant of range.
 
+range m n = range_h m n []
+where range_h m n acc | m > n = reverse acc
+| otherwise = range_h (m+1) n (m:acc)
 
